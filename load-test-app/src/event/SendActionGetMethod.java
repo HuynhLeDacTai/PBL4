@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import view.*;
+import view.Child_view.panel_Content_Create_Http_Request;
 import Thread.Thread_Get;
 
 public class SendActionGetMethod implements ActionListener {
