@@ -11,13 +11,14 @@ import javax.swing.table.DefaultTableModel;
 
 import view.*;
 import view.Child_view.panel_Content_Create_Http_Request;
+import view.Child_view.panel_Content_View_Detail_Results;
 import Thread.Thread_Get;
 
 public class SendActionGetMethod implements ActionListener {
-	Get g;
+	panel_Content_Create_Http_Request g;
 	Thread_Get t;
 
-	public SendActionGetMethod(Get g) {
+	public SendActionGetMethod(panel_Content_Create_Http_Request g) {
 		this.g = g;
 	}
 
@@ -32,13 +33,13 @@ public class SendActionGetMethod implements ActionListener {
 			g.thread = new Thread[g.howManyThreads];
 
 			for (int i = 0; i < g.thread.length; i++) {
-				t = new Thread_Get(g);
 
-				g.thread[i] = new Thread(t);
+				g.thread[i] = new Thread(new Thread_Get(g));
 
 			}
 
 			for (int i = 0; i < g.thread.length; ++i) {
+				g.index=i;
 				g.thread[i].start();
 				if (i == 0) {
 					g.Starttime = System.currentTimeMillis();
@@ -48,8 +49,7 @@ public class SendActionGetMethod implements ActionListener {
 				}
 				final long timestamp = new Date().getTime();
 				g.kq = GetDate(timestamp);
-				g.thread[i].sleep(2000);
-				// kq = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+				g.thread[i].sleep(200);
 
 			}
 		} catch (Exception ex) {
@@ -57,25 +57,17 @@ public class SendActionGetMethod implements ActionListener {
 		}
 		g.through = (g.howManyThreads
 				/ Double.parseDouble((g.Endtime + g.reponsetime.get(g.reponsetime.size() - 1) - g.Starttime) + ""))
-				* 60000;
-		DefaultTableModel tableModel2;
-		g.table2.getModel();
-		tableModel2 = (DefaultTableModel) g.table2.getModel();
-		tableModel2.addRow(new Object[] { "HTTP request " + g.count_request, g.howManyThreads,
+				* 1000;
+		g.tableModel2.addRow(new Object[] { "HTTP request " + g.count_request, g.howManyThreads,
 				g.df.format(TB(g.reponsetime)), Min(g.reponsetime), Max(g.reponsetime), g.Error,
-				g.df.format(g.through) + "/min", g.df.format(TB(g.Byte) / 1024) });
+				g.df.format(g.through) + "/sec", g.df.format(TB(g.Byte) / 1024) });
 	}
 
 	public String GetDate(long date) {
 
-		// with java.util.Date/Calendar api
 		final Calendar cal = Calendar.getInstance();
 		cal.setTimeInMillis(date);
-
-		// and here's how to get the String representation
 		final String timeString = new SimpleDateFormat("HH:mm:ss:SSS").format(cal.getTime());
-//	System.out.println(minutes);
-		// System.out.println(timeString);
 		return timeString;
 
 	}

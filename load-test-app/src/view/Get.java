@@ -95,7 +95,7 @@ public class Get extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		Send = new JButton("SEND");
-		Send.addActionListener(new SendActionGetMethod(this));
+		//Send.addActionListener(new SendActionGetMethod(this));
 		Send.setActionCommand(CREATE_REQUEST);
 		Send.setBounds(1100, 224, 95, 40);
 		contentPane.add(Send);

@@ -5,6 +5,10 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -20,10 +24,27 @@ import event.SendActionGetMethod;
 
 public class panel_Content_Create_Http_Request extends JPanel {
 	public static final String CREATE_REQUEST = "CREATE_REQUEST";
-	public static int howManyThreads = 0;
-	public JTextField requestNum;
+	public JTextField txtServerName;
+	public JTextField txtPath;
 	public DefaultTableModel tableModel;
+	public DefaultTableModel tableModel2;
+	public static int howManyThreads = 0;
+	public static Thread thread[];
+	public JTextField requestNum;
 	public JButton btnSend;
+	public static int dem = 1;
+	public static int index;
+	
+	public static int count_request=0;
+	public String kq = "";
+	public Date d;
+	public long Endtime;
+	public long Starttime;
+	public double through = 0;
+	public List<Integer> reponsetime = new ArrayList<>();
+	public static int Error = 0;
+	public List<Integer> Byte = new ArrayList<>();
+	public DecimalFormat df = new DecimalFormat("#.##");
 	private JProgressBar progressBar;
 	public panel_Content_Create_Http_Request()
 	{
@@ -40,13 +61,13 @@ public class panel_Content_Create_Http_Request extends JPanel {
 		panelContent.setLayout(null);
 		panelContent.setBounds(0,0, 864, 406);
 
-		JLabel lblNewLabel_1_2 = new JLabel("Server Name or IP:");
+	    JLabel lblNewLabel_1_2 = new JLabel("Server Name or IP:");
 		lblNewLabel_1_2.setBounds(189, 11, 143, 27);
 		lblNewLabel_1_2.setForeground(SystemColor.BLACK);
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
 		panelContent.add(lblNewLabel_1_2);
 		
-		JTextField txtServerName = new JTextField();
+		 txtServerName = new JTextField();
 		txtServerName.setBounds(333, 13, 268, 27);
 		txtServerName.setForeground(Color.WHITE);
 		panelContent.add(txtServerName);
@@ -81,7 +102,7 @@ public class panel_Content_Create_Http_Request extends JPanel {
 		lblNewLabel_1_2_2.setBounds(189, 205, 200, 24);
 		panelContent.add(lblNewLabel_1_2_2);
 		
-		JTextField txtPath = new JTextField();
+		 txtPath = new JTextField();
 		txtPath.setForeground(Color.WHITE);
 		txtPath.setColumns(10);
 		txtPath.setBounds(333, 205, 268, 27);
@@ -92,15 +113,14 @@ public class panel_Content_Create_Http_Request extends JPanel {
 		btnSend.setBounds(385, 275, 95, 40);
 		btnSend.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnSend.setBackground(new Color(176, 224, 230));
-//		btnSend.addActionListener(new SendActionGetMethod(this));
-//		btnSend.setActionCommand(CREATE_REQUEST);
+		btnSend.addActionListener(new SendActionGetMethod(this));
+	    btnSend.setActionCommand(CREATE_REQUEST);
 		panelContent.add(btnSend);
 		
 		progressBar = new JProgressBar();
 		progressBar.setStringPainted(true);
 		progressBar.setBounds(268, 353, 339, 24);
 		panelContent.add(progressBar);
-//		Process();
 		this.add(panelContent);
 	}
 	public void Process()

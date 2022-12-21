@@ -12,12 +12,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class panel_Content_View_Summary_Results extends JPanel{
 	private JTable table;
-	private DefaultTableModel tableModel;
-	public panel_Content_View_Summary_Results()
+	public panel_Content_View_Summary_Results(panel_Content_Create_Http_Request p)
 	{
-		initcomponent();
+		initcomponent(p);
 	}
-	public void initcomponent(){
+	public void initcomponent(panel_Content_Create_Http_Request p){
 		this.setLayout(null);
 		this.setSize(864, 406);
 		this.setBackground(Color.LIGHT_GRAY);
@@ -43,8 +42,7 @@ public class panel_Content_View_Summary_Results extends JPanel{
 				new String[] { "Label", "#Sample", "Average", "Min", "Max", "Error%", "Through", "KB/sec" }));
 		scrollPane.setViewportView(table);
 		table.getModel();
-		tableModel = (DefaultTableModel) table.getModel();		
-		
+		p.tableModel2 = (DefaultTableModel) table.getModel();		
 		this.add(panelContent);
 	}
 }

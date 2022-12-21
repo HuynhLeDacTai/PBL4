@@ -9,15 +9,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import view.Child_view.*;
 
 public class panel_Content_View_Detail_Results extends JPanel{
 	private JTable table;
-	private DefaultTableModel tableModel;
-	public panel_Content_View_Detail_Results()
+	public panel_Content_View_Detail_Results(panel_Content_Create_Http_Request p)
 	{
-		initcomponent();
+		initcomponent(p);
 	}
-	public void initcomponent(){
+	public void initcomponent(panel_Content_Create_Http_Request p){
 		this.setLayout(null);
 		this.setSize(864, 406);
 		this.setBackground(Color.LIGHT_GRAY);
@@ -42,7 +42,7 @@ public class panel_Content_View_Detail_Results extends JPanel{
 				new String[] { "Sample#", "Start time", "Label", "Sample time(ms)", "Status", "Byte" }));
 		scrollPane.setViewportView(table);
 		table.getModel();
-		tableModel = (DefaultTableModel) table.getModel();		
+		p.tableModel = (DefaultTableModel) table.getModel();		
 		
 		this.add(panelContent);
 	}

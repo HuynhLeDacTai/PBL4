@@ -12,15 +12,17 @@ import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
 import view.*;
+import view.Child_view.*;
 
 public class Thread_Get implements Runnable {
-	Get g;
+	panel_Content_Create_Http_Request g;
 
-	public Thread_Get(Get g) {
+	public Thread_Get(panel_Content_Create_Http_Request g) {
 		this.g = g;
 	}
 
 	public void run() {
+		long index =g.index;
 		long start = 0;
 		long start2 = 0;
 		long finish = 0;
@@ -33,13 +35,10 @@ public class Thread_Get implements Runnable {
 		StringBuilder body = new StringBuilder();
 		StringBuilder header = new StringBuilder();
 		try {
-			URL url = new URL(g.servername.getText() + g.path.getText());
+			URL url = new URL(g.txtServerName.getText() + g.txtPath.getText());
 			HttpURLConnection httpUrlConnect = (HttpURLConnection) url.openConnection();
-//   			httpUrlConnect.setConnectTimeout(1000);
 			httpUrlConnect.setRequestMethod("GET");
 			start = System.currentTimeMillis();
-//			d = new Date();
-//			kq = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
 			httpUrlConnect.connect();
 
 			if (httpUrlConnect.getResponseCode() == 200) {
@@ -89,11 +88,7 @@ public class Thread_Get implements Runnable {
 		result = ((finish - start) + "");
 
 		int Byte_reponse = header.length() + body.length();
-//		DefaultTableModel tableModel;
-//		g.table.getModel();
-//	   
-//		tableModel = (DefaultTableModel) g.table.getModel();
-		g.tableModel.addRow(new Object[] { g.dem++, g.kq, "HTTP request", result + "ms", status, Byte_reponse });
+	    g.tableModel.addRow(new Object[] { index, g.kq, "HTTP request", result + "ms", status, Byte_reponse });
 		g.reponsetime.add(Integer.parseInt(result));
 		g.Byte.add(header.length() + body.length());
 

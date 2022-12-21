@@ -87,8 +87,8 @@ public class Mainn extends JFrame {
 		
 		HomePage = new panel_Content_Homepage();
 		Create_HTTP_Request = new panel_Content_Create_Http_Request();
-		Content_View_Results_In_Table = new panel_Content_View_Detail_Results();
-		Content_Aggregate_Report = new panel_Content_View_Summary_Results();
+		Content_View_Results_In_Table = new panel_Content_View_Detail_Results(Create_HTTP_Request);
+		Content_Aggregate_Report = new panel_Content_View_Summary_Results(Create_HTTP_Request);
 		
 		HomePage.setBounds(10, 140, 864, 406);
 		HomePage.setVisible(true);
