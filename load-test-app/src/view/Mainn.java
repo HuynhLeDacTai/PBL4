@@ -15,7 +15,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-import event.SendActionGetMethod;
+import event.SendActionMethod;
 import view.Child_view.panel_Content_Homepage;
 import view.Child_view.panel_Content_View_Detail_Results;
 import view.Child_view.panel_Content_View_Summary_Results;

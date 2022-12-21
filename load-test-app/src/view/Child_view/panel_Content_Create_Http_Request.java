@@ -20,12 +20,13 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import event.SendActionGetMethod;
+import event.SendActionMethod;
 
 public class panel_Content_Create_Http_Request extends JPanel {
 	public static final String CREATE_REQUEST = "CREATE_REQUEST";
 	public JTextField txtServerName;
 	public JTextField txtPath;
+	public JComboBox cbbMethod;
 	public DefaultTableModel tableModel;
 	public DefaultTableModel tableModel2;
 	public static int howManyThreads = 0;
@@ -92,8 +93,9 @@ public class panel_Content_Create_Http_Request extends JPanel {
 		lblNewLabel_1_2_1.setBounds(189, 140, 200, 24);
 		panelContent.add(lblNewLabel_1_2_1);
 
-		JComboBox cbbMethod = new JComboBox();
-		cbbMethod.setModel(new DefaultComboBoxModel(new String[] {"GET", "POST"}));
+		
+		String[] options = {"GET", "POST"};
+		cbbMethod = new JComboBox(options);
 		cbbMethod.setBounds(333, 140, 85, 22);
 		panelContent.add(cbbMethod);
 		
@@ -113,7 +115,7 @@ public class panel_Content_Create_Http_Request extends JPanel {
 		btnSend.setBounds(385, 275, 95, 40);
 		btnSend.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnSend.setBackground(new Color(176, 224, 230));
-		btnSend.addActionListener(new SendActionGetMethod(this));
+		btnSend.addActionListener(new SendActionMethod(this));
 	    btnSend.setActionCommand(CREATE_REQUEST);
 		panelContent.add(btnSend);
 		

@@ -13,19 +13,19 @@ import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
 import view.*;
+import view.Child_view.panel_Content_Create_Http_Request;
 
 public class Thread_Post implements Runnable {
-	Post p;
+	panel_Content_Create_Http_Request p;
 
-	public Thread_Post(Post p) {
+	public Thread_Post(panel_Content_Create_Http_Request p) {
 		this.p = p;
 	}
 
 	public void run() {
+		long index =p.index;
 		long start = 0;
-		long start2 = 0;
 		long finish = 0;
-		long finish2 = 0;
 
 		int len;
 		String status = "";
@@ -34,21 +34,16 @@ public class Thread_Post implements Runnable {
 		StringBuilder body = new StringBuilder();
 		StringBuilder header = new StringBuilder();
 		try {
-			URL url = new URL(p.servername.getText());
+			URL url = new URL(p.txtServerName.getText());
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-//   			httpUrlConnect.setConnectTimeout(1000);
 			con.setRequestMethod("POST");
 			con.setRequestProperty("User-Agent", "Mozilla/5.0");
-
-			// For POST only - START
 			con.setDoOutput(true);
 			OutputStream os = con.getOutputStream();
-			os.write(p.path.getText().getBytes());
+			os.write(p.txtPath.getText().getBytes());
 			os.flush();
 			os.close();
 			start = System.currentTimeMillis();
-//			d = new Date();
-//			kq = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
 
 			if (con.getResponseCode() == 200) {
 				status = con.getResponseMessage();
@@ -83,7 +78,6 @@ public class Thread_Post implements Runnable {
 
 			if (con.getResponseCode() == 404) {
 				p.Error++;
-
 			}
 
 //			/////////
@@ -96,7 +90,7 @@ public class Thread_Post implements Runnable {
 		result = ((finish - start) + "");
 
 		int Byte_reponse = header.length() + body.length();
-		p.tableModel.addRow(new Object[] { p.dem++, p.kq, "HTTP request", result + "ms", status, Byte_reponse });
+		p.tableModel.addRow(new Object[] { index, p.kq, "HTTP request", result + "ms", status, Byte_reponse });
 		p.reponsetime.add(Integer.parseInt(result));
 		p.Byte.add(header.length() + body.length());
 //		System.out.println(body.toString());

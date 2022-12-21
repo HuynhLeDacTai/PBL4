@@ -13,12 +13,12 @@ import view.*;
 import view.Child_view.panel_Content_Create_Http_Request;
 import view.Child_view.panel_Content_View_Detail_Results;
 import Thread.Thread_Get;
+import Thread.Thread_Post;
 
-public class SendActionGetMethod implements ActionListener {
+public class SendActionMethod implements ActionListener {
 	panel_Content_Create_Http_Request g;
-	Thread_Get t;
 
-	public SendActionGetMethod(panel_Content_Create_Http_Request g) {
+	public SendActionMethod(panel_Content_Create_Http_Request g) {
 		this.g = g;
 	}
 
@@ -32,11 +32,17 @@ public class SendActionGetMethod implements ActionListener {
 		try {
 			g.thread = new Thread[g.howManyThreads];
 
-			for (int i = 0; i < g.thread.length; i++) {
-
-				g.thread[i] = new Thread(new Thread_Get(g));
-
-			}
+			
+           if(g.cbbMethod.getSelectedIndex()==0) {
+        	   for (int i = 0; i < g.thread.length; i++) {
+   				g.thread[i] = new Thread(new Thread_Get(g));
+   			}
+           }
+           else {
+        	   for (int i = 0; i < g.thread.length; i++) {
+      				g.thread[i] = new Thread(new Thread_Post(g));
+      			}
+           }
 
 			for (int i = 0; i < g.thread.length; ++i) {
 				g.index=i;
@@ -62,6 +68,7 @@ public class SendActionGetMethod implements ActionListener {
 				g.df.format(TB(g.reponsetime)), Min(g.reponsetime), Max(g.reponsetime), g.Error,
 				g.df.format(g.through) + "/sec", g.df.format(TB(g.Byte) / 1024) });
 	}
+	
 
 	public String GetDate(long date) {
 

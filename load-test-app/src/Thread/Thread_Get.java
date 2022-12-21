@@ -24,9 +24,8 @@ public class Thread_Get implements Runnable {
 	public void run() {
 		long index =g.index;
 		long start = 0;
-		long start2 = 0;
 		long finish = 0;
-		long finish2 = 0;
+
 
 		int len;
 		String status = "";
@@ -47,13 +46,10 @@ public class Thread_Get implements Runnable {
 						new InputStreamReader(httpUrlConnect.getInputStream()))) {
 					for (String line; (line = reader.readLine()) != null;) {
 						body.append(line);
-						// System.out.println(line);
-
 					}
 				}
 
 				Map<String, List<String>> headerFields = httpUrlConnect.getHeaderFields();
-
 				Set<String> headerFieldsSet = headerFields.keySet();
 				Iterator<String> hearerFieldsIter = headerFieldsSet.iterator();
 
