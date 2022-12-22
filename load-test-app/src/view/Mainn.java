@@ -17,6 +17,7 @@ import javax.swing.tree.DefaultTreeModel;
 
 import event.SendActionMethod;
 import view.Child_view.panel_Content_Homepage;
+import view.Child_view.panel_Content_Input_Path;
 import view.Child_view.panel_Content_View_Detail_Results;
 import view.Child_view.panel_Content_View_Summary_Results;
 import view.Child_view.panel_Content_Create_Http_Request;
@@ -32,6 +33,7 @@ public class Mainn extends JFrame {
 	private panel_Content_Create_Http_Request Create_HTTP_Request;
 	private panel_Content_View_Detail_Results Content_View_Results_In_Table;
 	private panel_Content_View_Summary_Results Content_Aggregate_Report;
+	private panel_Content_Input_Path Content_Input_Path;
 	/**
 	 * Launch the application.
 	 */
@@ -89,6 +91,7 @@ public class Mainn extends JFrame {
 		Create_HTTP_Request = new panel_Content_Create_Http_Request();
 		Content_View_Results_In_Table = new panel_Content_View_Detail_Results(Create_HTTP_Request);
 		Content_Aggregate_Report = new panel_Content_View_Summary_Results(Create_HTTP_Request);
+		Content_Input_Path = new panel_Content_Input_Path();
 		
 		HomePage.setBounds(10, 140, 864, 406);
 		HomePage.setVisible(true);
@@ -101,11 +104,15 @@ public class Mainn extends JFrame {
 		
 		Content_Aggregate_Report.setBounds(10, 140, 864, 406);
 		Content_Aggregate_Report.setVisible(false);
+		
+		Content_Input_Path.setBounds(10, 140, 864, 406);
+		Content_Input_Path.setVisible(false);
 	
 		panel_main.add(HomePage);
 		panel_main.add(Create_HTTP_Request);
 		panel_main.add(Content_View_Results_In_Table);
 		panel_main.add(Content_Aggregate_Report);
+		panel_main.add(Content_Input_Path);
 		
 //		Create_HTTP_Request.btnSend.addActionListener(new SendActionGetMethod(this));
 	}
@@ -126,9 +133,7 @@ public class Mainn extends JFrame {
 			TestByCode.add(new DefaultMutableTreeNode("View Summary Results"));
 			TestByCode.add(new DefaultMutableTreeNode("View Detail Results"));
 		DefaultMutableTreeNode TestByBurpSuite = new DefaultMutableTreeNode("Test By Burp Suite");
-			TestByBurpSuite.add(new DefaultMutableTreeNode("Create HTTP Request"));
-			TestByBurpSuite.add(new DefaultMutableTreeNode("Summary Report"));
-			TestByBurpSuite.add(new DefaultMutableTreeNode("View Results in Table"));
+			TestByBurpSuite.add(new DefaultMutableTreeNode("Input Path"));
 			
 		TestPlan.add(TestByCode);
 		TestPlan.add(TestByBurpSuite);
@@ -146,7 +151,7 @@ public class Mainn extends JFrame {
                 	Create_HTTP_Request.setVisible(true);
                 	Content_View_Results_In_Table.setVisible(false);
                 	Content_Aggregate_Report.setVisible(false);
-                	System.out.println("ok"); 
+                	Content_Input_Path.setVisible(false);
                 } 
                 else if (path.equals("[Test Plan, Test By HTTP Request Coding, View Detail Results]"))
                 {
@@ -154,7 +159,7 @@ public class Mainn extends JFrame {
                 	Create_HTTP_Request.setVisible(false);
                 	Content_View_Results_In_Table.setVisible(true);
                 	Content_Aggregate_Report.setVisible(false);
-                	System.out.println(path);
+                	Content_Input_Path.setVisible(false);
                 }
                 else if (path.equals("[Test Plan, Test By HTTP Request Coding, View Summary Results]"))
                 {
@@ -162,22 +167,18 @@ public class Mainn extends JFrame {
                 	Create_HTTP_Request.setVisible(false);
                 	Content_View_Results_In_Table.setVisible(false);
                 	Content_Aggregate_Report.setVisible(true);
-                	System.out.println(path);
+                	Content_Input_Path.setVisible(false);
                 }
 
-//                //Test By Burp Suite
-//                else if (path.equals("[Test Plan, Test By Burp Suite, Create HTTP Request]"))
-//                {
-//                	System.out.println(1);
-//                }
-//                else if (path.equals("[Test Plan, Test By Burp Suite, Summary Report]"))
-//                {
-//                	System.out.println(1);
-//                }
-//                else if (path.equals("[Test Plan, Test By Burp Suite, View Results in Table]"))
-//                {
-//                	System.out.println(1);
-//                }
+                //Test By Burp Suite
+                else if (path.equals("[Test Plan, Test By Burp Suite, Input Path]"))
+                {
+                	HomePage.setVisible(false);
+                	Create_HTTP_Request.setVisible(false);
+                	Content_View_Results_In_Table.setVisible(false);
+                	Content_Aggregate_Report.setVisible(false);
+                	Content_Input_Path.setVisible(true);
+                }
                 else if (path.equals("[Test Plan]"))
                 {
                    	System.out.println(path);
