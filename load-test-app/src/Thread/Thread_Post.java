@@ -35,6 +35,7 @@ public class Thread_Post implements Runnable {
 		StringBuilder header = new StringBuilder();
 		try {
 			URL url = new URL(p.txtServerName.getText());
+			start = System.currentTimeMillis();
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("POST");
 			con.setRequestProperty("User-Agent", "Mozilla/5.0");
@@ -43,9 +44,10 @@ public class Thread_Post implements Runnable {
 			os.write(p.txtPath.getText().getBytes());
 			os.flush();
 			os.close();
-			start = System.currentTimeMillis();
+		
 
 			if (con.getResponseCode() == 200) {
+				finish = System.currentTimeMillis();
 				status = con.getResponseMessage();
 				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 				String inputLine;
@@ -85,7 +87,7 @@ public class Thread_Post implements Runnable {
 		} catch (Exception e) {
 
 		} finally {
-			finish = System.currentTimeMillis();
+		
 		}
 		result = ((finish - start) + "");
 

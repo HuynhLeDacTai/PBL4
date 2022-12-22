@@ -15,41 +15,27 @@ public class ReadFile {
    private static ArrayList<String> Status = new ArrayList<>();
     public static void main(String args[]) {
 
-        String url = "E:\\logtest.txt";
+        String url = "E:\\1.txt";
 
-        // Đọc dữ liệu từ File với BufferedReader
         FileInputStream fileInputStream = null;
         BufferedReader bufferedReader = null;
 
-
+        int count=0;
         try {
             
             fileInputStream = new FileInputStream(url);
             bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
             String line = bufferedReader.readLine();
-            int dem =1;
+            int dem =0;
             while (line != null) {
-            	String[] arrofline = line.split(":",2);
-            	if(arrofline[0].equals("Set-Cookie")) {
-            		dem=4;
+            	if(line.contains("==")) {
+                           dem=1;
             	}
-               System.out.println(line);
-               System.out.println(dem+"");
-               if(dem==2) {
-            	   String[] arrOfStr= line.split("h",2);
-                 	Ngay.add(arrOfStr[0]);
-               }
-               if(dem==4 && !arrofline[0].equals("Set-Cookie")) {
+               if(dem==2 && line.contains("HTTP")) {
             	   String[] arrOfStr= line.split(" ",2);
             	   Status.add(arrOfStr[1]);
+            	   count++;
                }
-               if(dem==14) {
-            	   dem=0;
-               }
-//               String[] arrOfStr= line.split(":",2);
-//               if(arrOfStr[0].equals("Date")) {
-//               	Ngay.add(arrOfStr[1]);
-//               }
                 line = bufferedReader.readLine();
                 dem++;
                
@@ -79,5 +65,6 @@ public class ReadFile {
 			System.out.println(string);
 			
 		}
+        System.out.println( count +"");
     }
 }

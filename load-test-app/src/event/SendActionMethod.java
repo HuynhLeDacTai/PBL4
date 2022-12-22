@@ -24,49 +24,56 @@ public class SendActionMethod implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals(g.CREATE_REQUEST)) {
-			g.howManyThreads = Integer.parseInt(g.requestNum.getText());
-			g.tableModel.setRowCount(0);
-			g.dem = 1;
-			g.count_request += 1;
-		}
-		try {
-			g.thread = new Thread[g.howManyThreads];
+			   if(g.txtPath.getText() !="" && checkNumber(g.requestNum.getText()) && g.txtServerName.getText()!="") {
+				   g.howManyThreads = Integer.parseInt(g.requestNum.getText());
+					g.tableModel.setRowCount(0);
+					g.dem = 1;
+					g.count_request += 1;
+					g.Announce.setText("");
+				
+				try {
+					g.thread = new Thread[g.howManyThreads];
 
-			
-           if(g.cbbMethod.getSelectedIndex()==0) {
-        	   for (int i = 0; i < g.thread.length; i++) {
-   				g.thread[i] = new Thread(new Thread_Get(g));
-   			}
-           }
-           else {
-        	   for (int i = 0; i < g.thread.length; i++) {
-      				g.thread[i] = new Thread(new Thread_Post(g));
-      			}
-           }
+					
+		           if(g.cbbMethod.getSelectedIndex()==0) {
+		        	   for (int i = 0; i < g.thread.length; i++) {
+		   				g.thread[i] = new Thread(new Thread_Get(g));
+		   			}
+		           }
+		           else {
+		        	   for (int i = 0; i < g.thread.length; i++) {
+		      				g.thread[i] = new Thread(new Thread_Post(g));
+		      			}
+		           }
 
-			for (int i = 0; i < g.thread.length; ++i) {
-				g.index=i;
-				g.thread[i].start();
-				if (i == 0) {
-					g.Starttime = System.currentTimeMillis();
+					for (int i = 0; i < g.thread.length; ++i) {
+						g.index=i;
+						g.thread[i].start();
+						if (i == 0) {
+							g.Starttime = System.currentTimeMillis();
+						}
+						if (i == g.thread.length - 1) {
+							g.Endtime = System.currentTimeMillis();
+						}
+						final long timestamp = new Date().getTime();
+						g.kq = GetDate(timestamp);
+						g.thread[i].sleep(200);
+
+					}
+				} catch (Exception ex) {
+					// TODO: handle exception
 				}
-				if (i == g.thread.length - 1) {
-					g.Endtime = System.currentTimeMillis();
-				}
-				final long timestamp = new Date().getTime();
-				g.kq = GetDate(timestamp);
-				g.thread[i].sleep(200);
-
-			}
-		} catch (Exception ex) {
-			// TODO: handle exception
+				g.through = (g.howManyThreads
+						/ Double.parseDouble((g.Endtime + g.reponsetime.get(g.reponsetime.size() - 1) - g.Starttime) + ""))
+						* 1000;
+				g.tableModel2.addRow(new Object[] { "HTTP request " + g.count_request, g.howManyThreads,
+						g.df.format(TB(g.reponsetime)), Min(g.reponsetime), Max(g.reponsetime), g.Error,
+						g.df.format(g.through) + "/sec", g.df.format(TB(g.Byte) / 1024) });
+			   }
+			   else {
+				   g.Announce.setText("Vui long kiem tra lai thong tin da nhap");
+			   }
 		}
-		g.through = (g.howManyThreads
-				/ Double.parseDouble((g.Endtime + g.reponsetime.get(g.reponsetime.size() - 1) - g.Starttime) + ""))
-				* 1000;
-		g.tableModel2.addRow(new Object[] { "HTTP request " + g.count_request, g.howManyThreads,
-				g.df.format(TB(g.reponsetime)), Min(g.reponsetime), Max(g.reponsetime), g.Error,
-				g.df.format(g.through) + "/sec", g.df.format(TB(g.Byte) / 1024) });
 	}
 	
 
@@ -107,5 +114,8 @@ public class SendActionMethod implements ActionListener {
 			}
 		}
 		return max;
+	}
+	public static boolean checkNumber(String txt) {
+		return txt.matches("-?\\d+(\\.\\d+)?");
 	}
 }

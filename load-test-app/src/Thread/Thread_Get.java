@@ -35,12 +35,13 @@ public class Thread_Get implements Runnable {
 		StringBuilder header = new StringBuilder();
 		try {
 			URL url = new URL(g.txtServerName.getText() + g.txtPath.getText());
+			start = System.currentTimeMillis();
 			HttpURLConnection httpUrlConnect = (HttpURLConnection) url.openConnection();
 			httpUrlConnect.setRequestMethod("GET");
-			start = System.currentTimeMillis();
 			httpUrlConnect.connect();
 
 			if (httpUrlConnect.getResponseCode() == 200) {
+				finish = System.currentTimeMillis();
 				status = httpUrlConnect.getResponseMessage();
 				try (BufferedReader reader = new BufferedReader(
 						new InputStreamReader(httpUrlConnect.getInputStream()))) {
@@ -79,7 +80,6 @@ public class Thread_Get implements Runnable {
 		} catch (Exception e) {
 
 		} finally {
-			finish = System.currentTimeMillis();
 		}
 		result = ((finish - start) + "");
 

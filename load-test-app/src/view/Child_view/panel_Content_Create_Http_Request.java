@@ -26,6 +26,7 @@ public class panel_Content_Create_Http_Request extends JPanel {
 	public static final String CREATE_REQUEST = "CREATE_REQUEST";
 	public JTextField txtServerName;
 	public JTextField txtPath;
+	public JLabel Announce ;
 	public JComboBox cbbMethod;
 	public DefaultTableModel tableModel;
 	public DefaultTableModel tableModel2;
@@ -118,6 +119,12 @@ public class panel_Content_Create_Http_Request extends JPanel {
 		btnSend.addActionListener(new SendActionMethod(this));
 	    btnSend.setActionCommand(CREATE_REQUEST);
 		panelContent.add(btnSend);
+		
+		Announce = new JLabel();
+		Announce.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		Announce.setForeground(Color.RED);
+		Announce.setBounds(300, 250, 300, 24);
+		panelContent.add(Announce);
 		
 		progressBar = new JProgressBar();
 		progressBar.setStringPainted(true);
