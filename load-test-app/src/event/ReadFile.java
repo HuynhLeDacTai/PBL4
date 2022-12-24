@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.PublicKey;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -13,8 +14,10 @@ import java.util.logging.Logger;
 import view.Child_view.panel_Content_Input_Path;
 
 public class ReadFile {
-   private static ArrayList<String> Ngay = new ArrayList<>();
-   private static ArrayList<String> Status = new ArrayList<>();
+	
+   public ArrayList<String> Ngay = new ArrayList<>();
+   public ArrayList<String> Status = new ArrayList<>();
+   public ArrayList<Integer> Time= new ArrayList<>(); 
    private String url;
    public int count;
    public ReadFile(String path)
@@ -39,6 +42,10 @@ public class ReadFile {
            	   Status.add(arrOfStr[1]);
            	   count++;
               }
+              if(dem==2 && line.contains("http://")) {
+           	   String[] arrOfStr= line.split(" ",2);
+           	   Ngay.add(arrOfStr[0]);
+              }
                line = bufferedReader.readLine();
                dem++;
               
@@ -59,69 +66,21 @@ public class ReadFile {
            }
        }
        
-       
-       for (String string : Ngay) {
-			System.out.println(string);
-			
-		}
-       for (String string : Status) {
-			System.out.println(string);
-			
-		}
-       System.out.println( count +"");
+      Cal();
+   
    }
-//    public static void main(String args[]) {
-//
-////        String url = "E:\\logtest.txt";
-//
-//        FileInputStream fileInputStream = null;
-//        BufferedReader bufferedReader = null;
-//
-//        int count=0;
-//        try {
-//            
-//            fileInputStream = new FileInputStream(url);
-//            bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
-//            String line = bufferedReader.readLine();
-//            int dem =0;
-//            while (line != null) {
-//            	if(line.contains("==")) {
-//                           dem=1;
-//            	}
-//               if(dem==2 && line.contains("HTTP")) {
-//            	   String[] arrOfStr= line.split(" ",2);
-//            	   Status.add(arrOfStr[1]);
-//            	   count++;
-//               }
-//                line = bufferedReader.readLine();
-//                dem++;
-//               
-//            }
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(ReadFile.class.getName())
-//                            .log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(ReadFile.class.getName())
-//                            .log(Level.SEVERE, null, ex);
-//        } finally {
-//            try {
-//                bufferedReader.close();
-//                fileInputStream.close();
-//            } catch (IOException ex) {
-//                Logger.getLogger(ReadFile.class.getName())
-//                                .log(Level.SEVERE, null, ex);
-//            }
-//        }
-//        
-//        
-//        for (String string : Ngay) {
-//			System.out.println(string);
-//			
-//		}
-//        for (String string : Status) {
-//			System.out.println(string);
-//			
-//		}
-//        System.out.println( count +"");
-//    }
+	public void Cal() {
+		
+		for(int i=0;i<Ngay.size();i++) {
+			if(i != Ngay.size()-1) {
+				 String[] arrOfStr= Ngay.get(i).split(":",3);
+				 String[] arrOfStr1= Ngay.get(i+1).split(":",3);
+				 int time_i= Integer.valueOf(arrOfStr[0])*3600 + Integer.valueOf(arrOfStr[1])*60 + Integer.valueOf(arrOfStr[2]);
+				 int time_i1= Integer.valueOf(arrOfStr1[0])*3600 + Integer.valueOf(arrOfStr1[1])*60 + Integer.valueOf(arrOfStr1[2]);
+				 Time.add(time_i1-time_i);
+			}
+		}
+	}
+
+
 }

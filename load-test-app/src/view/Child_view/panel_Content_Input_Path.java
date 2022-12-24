@@ -16,10 +16,13 @@ import javax.swing.table.DefaultTableModel;
 
 import event.ReadFile;
 import event.SendActionMethod;
-
+import event.*;
 public class panel_Content_Input_Path extends JPanel {
 	private String txtPath;
 	private JTable table;
+	public JTextField txtPathLogFile;
+	public JLabel lblNewLabel_1_2;
+	public DefaultTableModel tableModel; 
 	public panel_Content_Input_Path()
 	{
 		initcomponent();
@@ -33,7 +36,7 @@ public class panel_Content_Input_Path extends JPanel {
 		panelContent=new JPanel();
 		panelContent.setBackground(Color.LIGHT_GRAY);
 		panelContent.setLayout(null);
-		panelContent.setBounds(0,0, 864, 406);
+		panelContent.setBounds(0,0, 900, 406);
 		
 	    JLabel lblNewLabel_1_1 = new JLabel("Input Path (Log File Of Intruder) :");
 	    lblNewLabel_1_1.setBounds(89, 11, 300, 27);
@@ -41,7 +44,13 @@ public class panel_Content_Input_Path extends JPanel {
 	    lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
 	    panelContent.add(lblNewLabel_1_1);
 	    
-	    JTextField txtPathLogFile= new JTextField();
+	    lblNewLabel_1_2 = new JLabel();
+		 lblNewLabel_1_2.setBounds(310,355, 300, 27);
+		    lblNewLabel_1_2.setForeground(Color.RED);
+		    lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
+		    panelContent.add(lblNewLabel_1_2);
+	    
+	     txtPathLogFile= new JTextField();
 	    txtPathLogFile.setBounds(333, 13, 268, 27);
 	    txtPathLogFile.setForeground(Color.WHITE);
 		panelContent.add(txtPathLogFile);
@@ -52,13 +61,7 @@ public class panel_Content_Input_Path extends JPanel {
 		btnOK.setBounds(650, 6, 95, 40);
 		btnOK.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnOK.setBackground(new Color(176, 224, 230));
-		btnOK.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				txtPath = txtPathLogFile.getText();
-				new ReadFile(txtPath);
-			}
-		});
+		btnOK.addActionListener(new ActionPath(this));
 //		btnOK.setActionCommand(CREATE_REQUEST);
 		panelContent.add(btnOK);
 	    
@@ -67,12 +70,12 @@ public class panel_Content_Input_Path extends JPanel {
 		panelContent.add(scrollPane);
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null, null }, },
-				new String[] { "Label", "#Sample", "Average", "Min", "Max", "Error%", "Through", "KB/sec" }));
+				new String[] { "#Sample", "Start request" ,"status" }));
 		scrollPane.setViewportView(table);
 		table.getModel();
-//		p.tableModel = (DefaultTableModel) table.getModel();	
+        tableModel = (DefaultTableModel) table.getModel();	
 		
-		
+	
 		this.add(panelContent);
 	}
 }
