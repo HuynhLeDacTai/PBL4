@@ -1,8 +1,6 @@
 package view.Child_view;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.text.DecimalFormat;
@@ -10,14 +8,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import event.SendActionMethod;

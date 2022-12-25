@@ -1,14 +1,10 @@
 package view.Child_view;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 
 public class panel_Content_Homepage extends JPanel {
 	private JLabel lblNewLabel_1;

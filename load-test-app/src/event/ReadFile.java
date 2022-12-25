@@ -5,24 +5,24 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.security.PublicKey;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import view.Child_view.panel_Content_Input_Path;
-
 public class ReadFile {
 	
-   public ArrayList<String> Ngay = new ArrayList<>();
-   public ArrayList<String> Status = new ArrayList<>();
-   public ArrayList<Integer> Time= new ArrayList<>(); 
+   public List<String> Ngay = new ArrayList<String>();
+   public List<String> Status = new ArrayList<String>();
+   public List<Integer> Time= new ArrayList<Integer>();
+   public List<String> Result = new ArrayList<String>();
    private String url;
    public int count;
-   public ReadFile(String path)
+   public int timeout;
+   public ReadFile(String path, String timeout)
    {
 	   url = path;
+	   this.timeout = Integer.parseInt(timeout);
 	   FileInputStream fileInputStream = null;
        BufferedReader bufferedReader = null;
 
@@ -67,6 +67,7 @@ public class ReadFile {
        }
        
       Cal();
+      result();
    
    }
 	public void Cal() {
@@ -81,6 +82,14 @@ public class ReadFile {
 			}
 		}
 	}
-
+	
+	public void result() {
+		for( int a:Time) {
+			if(a > timeout) {
+				Result.add("Timeout!!");
+			} else Result.add("Success!");
+		}
+	}
+ 
 
 }

@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.table.DefaultTableModel;
-
-import view.*;
 import view.Child_view.panel_Content_Create_Http_Request;
 
 public class Thread_Post implements Runnable {

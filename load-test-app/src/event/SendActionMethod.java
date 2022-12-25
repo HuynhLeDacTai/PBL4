@@ -7,13 +7,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.table.DefaultTableModel;
-
-import view.*;
-import view.Child_view.panel_Content_Create_Http_Request;
-import view.Child_view.panel_Content_View_Detail_Results;
 import Thread.Thread_Get;
 import Thread.Thread_Post;
+import view.Child_view.panel_Content_Create_Http_Request;
 
 public class SendActionMethod implements ActionListener {
 	panel_Content_Create_Http_Request g;

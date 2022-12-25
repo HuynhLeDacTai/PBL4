@@ -12,20 +12,24 @@ public class ActionPath implements ActionListener {
 		this.g = g;
 	}
 	public void actionPerformed(ActionEvent e) {
-		g.lblNewLabel_1_2.setText("");
+
 		g.tableModel.setRowCount(0);
 		if(g.txtPathLogFile.getText() !="") {
-			 ReadFile r = new ReadFile(g.txtPathLogFile.getText());
+			 ReadFile r = new ReadFile(g.txtPathLogFile.getText(), g.txtTimeOut.getText());
 			 for(int i=0 ;i<r.Ngay.size()-1;i++) {
-				 g.tableModel.addRow(new Object[] { i ,r.Ngay.get(i),r.Status.get(i)} );
+				 g.tableModel.addRow(new Object[] { i ,r.Ngay.get(i),r.Status.get(i), r.Result.get(i)} );
 			 }
 			 for(int i=0 ;i<r.Time.size();i++) {
 				 System.out.println(i + " " + r.Time.get(i));
+			 }
+			 for(int i=0 ;i<r.Result.size();i++) {
+				 System.out.println(i + " " + r.Result.get(i));
 			 }
 		}
 		else {
 			g.lblNewLabel_1_2.setText("Vui lòng kiểm tra đường path...");
 		}
+		
 	}
       
 }

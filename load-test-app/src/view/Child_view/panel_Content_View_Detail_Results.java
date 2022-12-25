@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import view.Child_view.*;
 
 public class panel_Content_View_Detail_Results extends JPanel{
 	private JTable table;
