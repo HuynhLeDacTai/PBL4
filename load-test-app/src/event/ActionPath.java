@@ -8,7 +8,7 @@ import view.Child_view.panel_Content_Input_Path;
 import view.Child_view.*;
 public class ActionPath implements ActionListener {
       panel_Content_Input_Path g;
-      public DecimalFormat df = new DecimalFormat("#.##");
+      public DecimalFormat df = new DecimalFormat("##.##");
 
 	public ActionPath(panel_Content_Input_Path g) {
 		this.g = g;
@@ -34,8 +34,7 @@ public class ActionPath implements ActionListener {
 			 for(int i=0 ;i<r.Result.size();i++) {
 				 System.out.println(i + " " + r.Result.get(i));
 			 }
-			 
-			 g.tableModel_1.addRow(new Object[] {r.Result.size(),dem1,dem2,df.format((dem1/r.Result.size())*100)});
+			 g.tableModel_1.addRow(new Object[] {r.Result.size(),dem1,dem2,df.format( Double.valueOf(dem1) / r.Result.size())});
 			 }
 		else {
 			g.lblNewLabel_1_2.setText("Vui lÃ²ng kiá»ƒm tra Ä‘Æ°á»�ng path...");
