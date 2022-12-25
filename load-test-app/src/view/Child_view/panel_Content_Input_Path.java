@@ -22,12 +22,14 @@ public class panel_Content_Input_Path extends JPanel {
 	public JLabel lblNewLabel_1_2;
 	public JLabel lblNewLabel_1_3;
 	public DefaultTableModel tableModel;
+	public DefaultTableModel tableModel_1;
 
 	public panel_Content_Input_Path() {
 		initcomponent();
 	}
 
 	public void initcomponent() {
+		
 		this.setLayout(null);
 		this.setSize(864, 406);
 		this.setBackground(Color.LIGHT_GRAY);

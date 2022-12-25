@@ -19,6 +19,7 @@ import javax.swing.tree.DefaultTreeModel;
 import view.Child_view.panel_Content_Create_Http_Request;
 import view.Child_view.panel_Content_Homepage;
 import view.Child_view.panel_Content_Input_Path;
+import view.Child_view.panel_Content_Path;
 import view.Child_view.panel_Content_View_Detail_Results;
 import view.Child_view.panel_Content_View_Summary_Results;
 
@@ -33,6 +34,7 @@ public class Mainn extends JFrame {
 	private panel_Content_View_Detail_Results Content_View_Results_In_Table;
 	private panel_Content_View_Summary_Results Content_Aggregate_Report;
 	private panel_Content_Input_Path Content_Input_Path;
+	private panel_Content_Path Content_Path_1;
 	/**
 	 * Launch the application.
 	 */
@@ -91,6 +93,7 @@ public class Mainn extends JFrame {
 		Content_View_Results_In_Table = new panel_Content_View_Detail_Results(Create_HTTP_Request);
 		Content_Aggregate_Report = new panel_Content_View_Summary_Results(Create_HTTP_Request);
 		Content_Input_Path = new panel_Content_Input_Path();
+		Content_Path_1 = new panel_Content_Path(Content_Input_Path);
 		
 		HomePage.setBounds(10, 140, 864, 406);
 		HomePage.setVisible(true);
@@ -106,12 +109,16 @@ public class Mainn extends JFrame {
 		
 		Content_Input_Path.setBounds(10, 140, 864, 406);
 		Content_Input_Path.setVisible(false);
+		
+		Content_Path_1.setBounds(10, 140, 864, 406);
+		Content_Path_1.setVisible(false);
 	
 		panel_main.add(HomePage);
 		panel_main.add(Create_HTTP_Request);
 		panel_main.add(Content_View_Results_In_Table);
 		panel_main.add(Content_Aggregate_Report);
 		panel_main.add(Content_Input_Path);
+		panel_main.add(Content_Path_1);
 		
 //		Create_HTTP_Request.btnSend.addActionListener(new SendActionGetMethod(this));
 	}
@@ -133,7 +140,7 @@ public class Mainn extends JFrame {
 			TestByCode.add(new DefaultMutableTreeNode("View Detail Results"));
 		DefaultMutableTreeNode TestByBurpSuite = new DefaultMutableTreeNode("Test By Burp Suite");
 			TestByBurpSuite.add(new DefaultMutableTreeNode("Input Path"));
-			
+			TestByBurpSuite.add(new DefaultMutableTreeNode("Result"));
 		TestPlan.add(TestByCode);
 		TestPlan.add(TestByBurpSuite);
 		tree.setModel(new DefaultTreeModel(TestPlan));
@@ -151,6 +158,7 @@ public class Mainn extends JFrame {
                 	Content_View_Results_In_Table.setVisible(false);
                 	Content_Aggregate_Report.setVisible(false);
                 	Content_Input_Path.setVisible(false);
+                	Content_Path_1.setVisible(false);
                 } 
                 else if (path.equals("[Test Plan, Test By HTTP Request Coding, View Detail Results]"))
                 {
@@ -159,6 +167,7 @@ public class Mainn extends JFrame {
                 	Content_View_Results_In_Table.setVisible(true);
                 	Content_Aggregate_Report.setVisible(false);
                 	Content_Input_Path.setVisible(false);
+                	Content_Path_1.setVisible(false);
                 }
                 else if (path.equals("[Test Plan, Test By HTTP Request Coding, View Summary Results]"))
                 {
@@ -167,6 +176,7 @@ public class Mainn extends JFrame {
                 	Content_View_Results_In_Table.setVisible(false);
                 	Content_Aggregate_Report.setVisible(true);
                 	Content_Input_Path.setVisible(false);
+                	Content_Path_1.setVisible(false);
                 }
 
                 //Test By Burp Suite
@@ -177,6 +187,15 @@ public class Mainn extends JFrame {
                 	Content_View_Results_In_Table.setVisible(false);
                 	Content_Aggregate_Report.setVisible(false);
                 	Content_Input_Path.setVisible(true);
+                	Content_Path_1.setVisible(false);
+                }
+                else if(path.equals("[Test Plan, Test By Burp Suite, Result]")) {
+                	HomePage.setVisible(false);
+                	Create_HTTP_Request.setVisible(false);
+                	Content_View_Results_In_Table.setVisible(false);
+                	Content_Aggregate_Report.setVisible(false);
+                	Content_Input_Path.setVisible(false);
+                	Content_Path_1.setVisible(true);
                 }
                 else if (path.equals("[Test Plan]"))
                 {
@@ -187,14 +206,7 @@ public class Mainn extends JFrame {
             } 
         });
 
-		
-//		ImageIcon SettingIcon = new ImageIcon("images/setting.png");
-//		if (SettingIcon != null) {
-//		    DefaultTreeCellRenderer renderer = 
-//		        new DefaultTreeCellRenderer();
-//		    renderer.setLeafIcon(SettingIcon);
-//		    tree.setCellRenderer(renderer);
-//		}
+	
 		
 	}
 }

@@ -2,22 +2,31 @@ package event;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 import view.Child_view.panel_Content_Input_Path;
-
+import view.Child_view.*;
 public class ActionPath implements ActionListener {
       panel_Content_Input_Path g;
+      public DecimalFormat df = new DecimalFormat("#.##");
 
 	public ActionPath(panel_Content_Input_Path g) {
 		this.g = g;
 	}
 	public void actionPerformed(ActionEvent e) {
-
+        int dem1=0;
+        int dem2=0;
 		g.tableModel.setRowCount(0);
 		if(g.txtPathLogFile.getText() !="") {
 			 ReadFile r = new ReadFile(g.txtPathLogFile.getText(), g.txtTimeOut.getText());
 			 for(int i=0 ;i<r.Ngay.size()-1;i++) {
 				 g.tableModel.addRow(new Object[] { i ,r.Ngay.get(i),r.Status.get(i), r.Result.get(i)} );
+				 if(r.Result.get(i).equals("Success!")) {
+					 dem1++;
+				 }
+				 if (r.Result.get(i).equals("Timeout!!")) {
+					 dem2++;
+				 }
 			 }
 			 for(int i=0 ;i<r.Time.size();i++) {
 				 System.out.println(i + " " + r.Time.get(i));
@@ -25,9 +34,11 @@ public class ActionPath implements ActionListener {
 			 for(int i=0 ;i<r.Result.size();i++) {
 				 System.out.println(i + " " + r.Result.get(i));
 			 }
-		}
+			 
+			 g.tableModel_1.addRow(new Object[] {r.Result.size(),dem1,dem2,df.format((dem1/r.Result.size())*100)});
+			 }
 		else {
-			g.lblNewLabel_1_2.setText("Vui lòng kiểm tra đường path...");
+			g.lblNewLabel_1_2.setText("Vui lÃ²ng kiá»ƒm tra Ä‘Æ°á»�ng path...");
 		}
 		
 	}
