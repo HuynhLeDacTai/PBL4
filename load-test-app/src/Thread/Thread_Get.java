@@ -39,7 +39,7 @@ public class Thread_Get implements Runnable {
 
 			if (httpUrlConnect.getResponseCode() == 200) {
 				finish = System.currentTimeMillis();
-				status = httpUrlConnect.getResponseMessage();
+				status = "OK";
 				try (BufferedReader reader = new BufferedReader(
 						new InputStreamReader(httpUrlConnect.getInputStream()))) {
 					for (String line; (line = reader.readLine()) != null;) {

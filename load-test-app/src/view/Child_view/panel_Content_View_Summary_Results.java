@@ -39,7 +39,7 @@ public class panel_Content_View_Summary_Results extends JPanel{
 		panelContent.add(scrollPane);
 		table = new JTable();
 		table.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null, null }, },
-				new String[] { "Label", "#Sample", "Average", "Min", "Max", "Error%", "Through", "KB/sec" }));
+				new String[] { "Label", "#Sample", "Average", "Min", "Max", "Error%", "Throughput", "KB/sec" }));
 		scrollPane.setViewportView(table);
 		table.getModel();
 		p.tableModel2 = (DefaultTableModel) table.getModel();		
