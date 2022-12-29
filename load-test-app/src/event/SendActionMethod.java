@@ -19,6 +19,7 @@ public class SendActionMethod implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		g.Process();
 		if (e.getActionCommand().equals(g.CREATE_REQUEST)) {
 			   if(g.txtPath.getText() !="" && checkNumber(g.requestNum.getText()) && g.txtServerName.getText()!="") {
 				   g.howManyThreads = Integer.parseInt(g.requestNum.getText());
