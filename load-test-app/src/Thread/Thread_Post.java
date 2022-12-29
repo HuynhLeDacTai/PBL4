@@ -45,7 +45,7 @@ public class Thread_Post implements Runnable {
 
 			if (con.getResponseCode() == 200) {
 				finish = System.currentTimeMillis();
-				status = con.getResponseMessage();
+				status = "OK";
 				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 				String inputLine;
 				while ((inputLine = in.readLine()) != null) {

@@ -63,7 +63,7 @@ public class SendActionMethod implements ActionListener {
 						/ Double.parseDouble((g.Endtime + g.reponsetime.get(g.reponsetime.size() - 1) - g.Starttime) + ""))
 						* 1000;
 				g.tableModel2.addRow(new Object[] { "HTTP request " + g.count_request, g.howManyThreads,
-						g.df.format(TB(g.reponsetime)), Min(g.reponsetime), Max(g.reponsetime), g.Error,
+						g.df.format(TB(g.reponsetime)), Min(g.reponsetime), Max(g.reponsetime), g.df.format(Double.valueOf(g.Error)/g.howManyThreads),
 						g.df.format(g.through) + "/sec", g.df.format(TB(g.Byte) / 1024) });
 			   }
 			   else {
