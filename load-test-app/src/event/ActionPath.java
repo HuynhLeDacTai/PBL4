@@ -14,8 +14,7 @@ public class ActionPath implements ActionListener {
 		this.g = g;
 	}
 	public void actionPerformed(ActionEvent e) {
-        int dem1=0;
-        int dem2=0;
+        int dem1=0, dem2=0, firstTimeout=0, lastSuccess=0;
 		g.tableModel.setRowCount(0);
 		if(g.txtPathLogFile.getText() !="") {
 			 ReadFile r = new ReadFile(g.txtPathLogFile.getText(), g.txtTimeOut.getText());

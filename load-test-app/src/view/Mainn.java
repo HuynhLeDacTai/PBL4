@@ -138,7 +138,7 @@ public class Mainn extends JFrame {
 			TestByCode.add(new DefaultMutableTreeNode("Create HTTP Request"));
 			TestByCode.add(new DefaultMutableTreeNode("View Summary Results"));
 			TestByCode.add(new DefaultMutableTreeNode("View Detail Results"));
-		DefaultMutableTreeNode TestByBurpSuite = new DefaultMutableTreeNode("Test By Burp Suite");
+		DefaultMutableTreeNode TestByBurpSuite = new DefaultMutableTreeNode("Test Database With Burp Suite");
 			TestByBurpSuite.add(new DefaultMutableTreeNode("Input Path"));
 			TestByBurpSuite.add(new DefaultMutableTreeNode("Result"));
 		TestPlan.add(TestByCode);
@@ -180,7 +180,7 @@ public class Mainn extends JFrame {
                 }
 
                 //Test By Burp Suite
-                else if (path.equals("[Test Plan, Test By Burp Suite, Input Path]"))
+                else if (path.equals("[Test Plan, Test Database With Burp Suite, Input Path]"))
                 {
                 	HomePage.setVisible(false);
                 	Create_HTTP_Request.setVisible(false);
@@ -189,7 +189,7 @@ public class Mainn extends JFrame {
                 	Content_Input_Path.setVisible(true);
                 	Content_Path_1.setVisible(false);
                 }
-                else if(path.equals("[Test Plan, Test By Burp Suite, Result]")) {
+                else if(path.equals("[Test Plan, Test Database With Burp Suite, Result]")) {
                 	HomePage.setVisible(false);
                 	Create_HTTP_Request.setVisible(false);
                 	Content_View_Results_In_Table.setVisible(false);

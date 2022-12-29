@@ -45,6 +45,7 @@ public class Thread_Get implements Runnable {
 					for (String line; (line = reader.readLine()) != null;) {
 						body.append(line);
 					}
+					status = "OK";
 				}
 
 				Map<String, List<String>> headerFields = httpUrlConnect.getHeaderFields();
