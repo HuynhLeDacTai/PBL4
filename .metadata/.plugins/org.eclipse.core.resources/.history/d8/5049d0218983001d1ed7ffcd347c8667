@@ -1,0 +1,201 @@
+package view;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTree;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+
+import event.SendActionMethod;
+import view.Child_view.panel_Content_Homepage;
+import view.Child_view.panel_Content_Input_Path;
+import view.Child_view.panel_Content_View_Detail_Results;
+import view.Child_view.panel_Content_View_Summary_Results;
+import view.Child_view.panel_Content_Create_Http_Request;
+import java.awt.SystemColor;
+
+public class Mainn extends JFrame {
+
+	private JPanel contentPane;
+	private JTree tree;
+	private JPanel panel_main;
+	private JLabel lblNewLabel_1;
+	private panel_Content_Homepage HomePage;
+	private panel_Content_Create_Http_Request Create_HTTP_Request;
+	private panel_Content_View_Detail_Results Content_View_Results_In_Table;
+	private panel_Content_View_Summary_Results Content_Aggregate_Report;
+	private panel_Content_Input_Path Content_Input_Path;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Mainn frame = new Mainn();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Mainn() {
+		setTitle("LOAD TEST ");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1151, 618);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(60, 63, 65));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(Color.LIGHT_GRAY);
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		CreateTree();
+		contentPane.add(tree);
+		
+		panel_main = new JPanel();
+		panel_main.setBackground(Color.WHITE);
+		panel_main.setBounds(241, 11, 884, 557);
+		contentPane.add(panel_main);
+		panel_main.setLayout(null);
+		
+		
+		JPanel panel_title = new JPanel();
+		panel_title.setBackground(Color.WHITE);
+		panel_title.setBounds(10, 11, 864, 118);
+		panel_main.add(panel_title);
+		panel_title.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("LOAD TEST APP");
+		lblNewLabel.setBounds(156, 11, 559, 85);
+		panel_title.add(lblNewLabel);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setForeground(SystemColor.inactiveCaptionText);
+		lblNewLabel.setFont(new Font("Wide Latin", Font.BOLD, 30));
+		
+		HomePage = new panel_Content_Homepage();
+		Create_HTTP_Request = new panel_Content_Create_Http_Request();
+		Content_View_Results_In_Table = new panel_Content_View_Detail_Results(Create_HTTP_Request);
+		Content_Aggregate_Report = new panel_Content_View_Summary_Results(Create_HTTP_Request);
+		Content_Input_Path = new panel_Content_Input_Path();
+		
+		HomePage.setBounds(10, 140, 864, 406);
+		HomePage.setVisible(true);
+		
+		Create_HTTP_Request.setBounds(10, 140, 864, 406);
+		Create_HTTP_Request.setVisible(false);
+		
+		Content_View_Results_In_Table.setBounds(10, 140, 864, 406);
+		Content_View_Results_In_Table.setVisible(true);
+		
+		Content_Aggregate_Report.setBounds(10, 140, 864, 406);
+		Content_Aggregate_Report.setVisible(false);
+		
+		Content_Input_Path.setBounds(10, 140, 864, 406);
+		Content_Input_Path.setVisible(false);
+	
+		panel_main.add(HomePage);
+		panel_main.add(Create_HTTP_Request);
+		panel_main.add(Content_View_Results_In_Table);
+		panel_main.add(Content_Aggregate_Report);
+		panel_main.add(Content_Input_Path);
+		
+//		Create_HTTP_Request.btnSend.addActionListener(new SendActionGetMethod(this));
+	}
+	
+	public void CreateTree()
+	{
+		tree = new JTree();
+		tree.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		tree.setForeground(Color.DARK_GRAY);
+		tree.setBackground(Color.WHITE);
+		tree.setBounds(10, 11, 221, 557);
+		
+		//create the root node
+		DefaultMutableTreeNode TestPlan = new DefaultMutableTreeNode("Test Plan");
+		//create the child node
+		DefaultMutableTreeNode TestByCode = new DefaultMutableTreeNode("Test By HTTP Request Coding");
+			TestByCode.add(new DefaultMutableTreeNode("Create HTTP Request"));
+			TestByCode.add(new DefaultMutableTreeNode("View Summary Results"));
+			TestByCode.add(new DefaultMutableTreeNode("View Detail Results"));
+		DefaultMutableTreeNode TestByBurpSuite = new DefaultMutableTreeNode("Test By Burp Suite");
+			TestByBurpSuite.add(new DefaultMutableTreeNode("Input Path"));
+			
+		TestPlan.add(TestByCode);
+		TestPlan.add(TestByBurpSuite);
+		tree.setModel(new DefaultTreeModel(TestPlan));
+		
+		tree.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                String path = e.getPath().toString();
+                
+//                //Test By HTTP Request Coding
+                if(path.equals("[Test Plan, Test By HTTP Request Coding, Create HTTP Request]"))
+                {   
+                	HomePage.setVisible(false);
+                	Create_HTTP_Request.setVisible(true);
+                	Content_View_Results_In_Table.setVisible(false);
+                	Content_Aggregate_Report.setVisible(false);
+                	Content_Input_Path.setVisible(false);
+                } 
+                else if (path.equals("[Test Plan, Test By HTTP Request Coding, View Detail Results]"))
+                {
+                	HomePage.setVisible(false);
+                	Create_HTTP_Request.setVisible(false);
+                	Content_View_Results_In_Table.setVisible(true);
+                	Content_Aggregate_Report.setVisible(false);
+                	Content_Input_Path.setVisible(false);
+                }
+                else if (path.equals("[Test Plan, Test By HTTP Request Coding, View Summary Results]"))
+                {
+                	HomePage.setVisible(false);
+                	Create_HTTP_Request.setVisible(false);
+                	Content_View_Results_In_Table.setVisible(false);
+                	Content_Aggregate_Report.setVisible(true);
+                	Content_Input_Path.setVisible(false);
+                }
+
+                //Test By Burp Suite
+                else if (path.equals("[Test Plan, Test By Burp Suite, Input Path]"))
+                {
+                	HomePage.setVisible(false);
+                	Create_HTTP_Request.setVisible(false);
+                	Content_View_Results_In_Table.setVisible(false);
+                	Content_Aggregate_Report.setVisible(false);
+                	Content_Input_Path.setVisible(true);
+                }
+                else if (path.equals("[Test Plan]"))
+                {
+                   	System.out.println(path);
+	            	HomePage.setVisible(true);
+	            	Create_HTTP_Request.setVisible(false);
+                }
+            } 
+        });
+
+		
+//		ImageIcon SettingIcon = new ImageIcon("images/setting.png");
+//		if (SettingIcon != null) {
+//		    DefaultTreeCellRenderer renderer = 
+//		        new DefaultTreeCellRenderer();
+//		    renderer.setLeafIcon(SettingIcon);
+//		    tree.setCellRenderer(renderer);
+//		}
+		
+	}
+}

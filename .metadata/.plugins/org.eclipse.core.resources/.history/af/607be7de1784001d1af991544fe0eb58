@@ -1,0 +1,86 @@
+package view.Child_view;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.SystemColor;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import event.ActionPath;
+public class panel_Content_Input_Path extends JPanel {
+	private String txtPath;
+	private JTable table;
+	public JTextField txtPathLogFile;
+	public JTextField txtTimeOut;
+	public JLabel lblNewLabel_1_2;
+	public JLabel lblNewLabel_1_3;
+	public DefaultTableModel tableModel; 
+	public panel_Content_Input_Path()
+	{
+		initcomponent();
+	}
+	public void initcomponent(){
+		this.setLayout(null);
+		this.setSize(864, 406);
+		this.setBackground(Color.LIGHT_GRAY);
+
+		JPanel panelContent;
+		panelContent=new JPanel();
+		panelContent.setBackground(Color.LIGHT_GRAY);
+		panelContent.setLayout(null);
+		panelContent.setBounds(0,0, 900, 406);
+		
+	    JLabel lblNewLabel_1_1 = new JLabel("Input Path (Log File Of Intruder) :");
+	    lblNewLabel_1_1.setBounds(89, 11, 300, 27);
+	    lblNewLabel_1_1.setForeground(SystemColor.BLACK);
+	    lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
+	    panelContent.add(lblNewLabel_1_1);
+	    
+	    JLabel lblNewLabel_1_2 = new JLabel("Set timeout value: ");
+	    lblNewLabel_1_1.setBounds(89, 11, 300, 27);
+	    lblNewLabel_1_1.setForeground(SystemColor.BLACK);
+	    lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
+	    panelContent.add(lblNewLabel_1_1);
+	    
+	    
+	    lblNewLabel_1_2 = new JLabel();
+		 lblNewLabel_1_2.setBounds(310,355, 300, 27);
+		    lblNewLabel_1_2.setForeground(Color.RED);
+		    lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
+		    panelContent.add(lblNewLabel_1_2);
+	    
+	     txtPathLogFile= new JTextField();
+	    txtPathLogFile.setBounds(333, 13, 268, 27);
+	    txtPathLogFile.setForeground(Color.WHITE);
+		panelContent.add(txtPathLogFile);
+		txtPathLogFile.setBackground(new Color(69, 73, 74));
+		txtPathLogFile.setColumns(10);
+		
+		JButton btnOK= new JButton("OK");
+		btnOK.setBounds(650, 6, 95, 40);
+		btnOK.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnOK.setBackground(new Color(176, 224, 230));
+		btnOK.addActionListener(new ActionPath(this));
+//		btnOK.setActionCommand(CREATE_REQUEST);
+		panelContent.add(btnOK);
+	    
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(30, 51, 804, 304);
+		panelContent.add(scrollPane);
+		table = new JTable();
+		table.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null, null }, },
+				new String[] { "#Sample", "Start request" ,"Status", "Result" }));
+		scrollPane.setViewportView(table);
+		table.getModel();
+        tableModel = (DefaultTableModel) table.getModel();	
+		
+	
+		this.add(panelContent);
+	}
+}
